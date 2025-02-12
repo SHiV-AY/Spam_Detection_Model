@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Details Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .scam-message {
+            color: red;
+            font-weight: bold;
+        }
+        .safe-message {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Mail Details :</h2>
+        <form action="/api/scam/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="size">Enter Your Mail Body :</label>
+                <input type="text" id="size" name="msg" required>
+            </div>     
+            <button type="submit">Submit</button>
+        </form>
+
+        {% if Predicted_Scam == 1 %}
+            <h1 class="scam-message">Spam Message Detected!</h1>
+        {% else %}
+            <h1 class="safe-message">Everything is OK!</h1>
+        {% endif %}
+    </div>
+</body>
+</html>
